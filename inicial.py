@@ -32,8 +32,18 @@ cursor.execute(
     f'INSERT INTO {TABLE_NAME} '
     '(id, name, weight) '
     'VALUES '
-    '(NULL, "Helena", 4), (NULL, "Eduardo", 10)'
+    '(NULL, "Helena", 4), '
+    '(NULL, "Eduardo", 10)'
 )
+connection.commit()
+
+sql = (
+    f"INSERT INTO {TABLE_NAME}"
+    "(name, weight)"
+    "VALUES"
+    "(?, ?)"
+)
+cursor.execute(sql, ["Joana", 4])
 connection.commit()
 
 cursor.close()
