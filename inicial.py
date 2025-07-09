@@ -9,6 +9,14 @@ TABLE_NAME = "customers"
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
+cursor.execute(
+    f'DELETE FROM {TABLE_NAME}'
+)
+cursor.execute(
+    f'DELETE FROM sqlite_sequence WHERE name="{TABLE_NAME}"'
+)
+connection.commit()
+
 cursor.execute(f"CREATE TABLE IF NOT EXISTIS {TABLE_NAME}"
                "("
                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -17,6 +25,15 @@ cursor.execute(f"CREATE TABLE IF NOT EXISTIS {TABLE_NAME}"
                ")"
                )
 
+connection.commit()
+
+#perfeito pra sql injection. Delicinha.
+cursor.execute(
+    f'INSERT INTO {TABLE_NAME} '
+    '(id, name, weight) '
+    'VALUES '
+    '(NULL, "Helena", 4), (NULL, "Eduardo", 10)'
+)
 connection.commit()
 
 cursor.close()
