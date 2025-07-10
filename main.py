@@ -35,5 +35,20 @@ with connection:
 
         connection.commit()
 
+    with connection.cursor() as cursor:
+        sql = ( 
+        f"INSERT INTO {TABLE_NAME} "
+            "(name, age) " \
+            "VALUES "
+            "(%(name)s, %(age)s) "
+        )
+
+        data = {
+            "name": "Stan",
+            "age": 100
+        }
+
+        result = cursor.execute(sql, data)
+
         print(cursor)
 
