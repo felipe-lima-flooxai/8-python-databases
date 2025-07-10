@@ -54,8 +54,8 @@ with connection:
 
 
     with connection.cursor() as cursor:
-        menor_id = input("Digite um id menor")
-        maior_id = input("Digite um id maior")
+        menor_id = 2
+        maior_id = 4
         sql  = (
             f"SELECT * FROM {TABLE_NAME} "
             f"WHERE id >= %s AND id <= %s "
@@ -63,6 +63,18 @@ with connection:
         cursor.execute(sql, (menor_id, maior_id))
 
         data5 = cursor.fetchone()
+
+        for row in data5:
+            print(row)
+
+    with connection.cursor() as cursor:
+        sql  = (
+            f"DELETE * FROM {TABLE_NAME} "
+            f"WHERE id = 4"
+        )
+        cursor.execute(sql)
+
+        connection.commit()
 
         for row in data5:
             print(row)
