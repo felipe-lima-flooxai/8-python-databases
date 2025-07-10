@@ -53,5 +53,20 @@ with connection:
             print(row)
 
 
+    with connection.cursor() as cursor:
+        menor_id = input("Digite um id menor")
+        maior_id = input("Digite um id maior")
+        sql  = (
+            f"SELECT * FROM {TABLE_NAME} "
+            f"WHERE id >= %s AND id <= %s "
+        )
+        cursor.execute(sql, (menor_id, maior_id))
+
+        data5 = cursor.fetchone()
+
+        for row in data5:
+            print(row)
+
+
 
 
