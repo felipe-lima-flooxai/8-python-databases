@@ -22,35 +22,7 @@ with connection:
             "PRIMARY KEY (id)"
             ") "
         )
-        
-
-    with connection.cursor() as cursor:
-        sql = ( 
-        f"INSERT INTO {TABLE_NAME} "
-            "(name, age) " \
-            "VALUES "
-            "(%s, %s) "
-        )
-        result = cursor.execute(sql, ("Luiz", 18))
-
-        connection.commit()
-
-    with connection.cursor() as cursor:
-        sql = ( 
-        f"INSERT INTO {TABLE_NAME} "
-            "(name, age) " \
-            "VALUES "
-            "(%(name)s, %(age)s) "
-        )
-
-        data = {
-            "name": "Stan",
-            "age": 100
-        }
-
-        result = cursor.execute(sql, data)
-        connection.commit()
-
+    
     with connection.cursor() as cursor:
         sql = ( 
         f"INSERT INTO {TABLE_NAME} "
@@ -66,6 +38,20 @@ with connection:
         {"name": "Cabaré", "age": 80},             
     )
 
-    result = cursor.executemany(sql, data)
-    connection.commit()
+    result = cursor.executemany(sql, data2)
+    connection.commit() 
+
+    with connection.cursor() as cursor:
+        sql  = (
+            f"SELECT * FROM {TABLE_NAME}"
+        )
+        cursor.execute(sql)
+
+        data5 = cursor.fetchall()
+
+        for row in data5:
+            print(row)
+
+
+
 
